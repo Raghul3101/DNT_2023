@@ -1,0 +1,17 @@
+import numpy as np
+import cv2 as cv
+
+impath = "thug duck.jpeg"
+
+image = cv.imread(impath)
+
+assert image is not None, "file could not be read, check with os.path.exists()"
+
+gray_image = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
+
+blurred_image = cv.GaussianBlur(gray_image, (5, 5), 0)
+sketch = cv.Canny(blurred_image, threshold1=30, threshold2=100)
+cv.imwrite("thugduck_final.jpeg",sketch)
+
+cv.waitKey(0)
+cv.destroyAllWindows()
